@@ -1,0 +1,28 @@
+Field (Eram :
+	SMD0,   256, 
+	BADC,   16, 
+	BFCC,   16,
+	MCUR,   16, 
+    MBRM,   16, 
+    MBCV,   16,
+
+    
+    SMW0,	16,
+    FLD0,	64,
+    FLD1,	128,
+    FLD2, 	192,
+    FLD3, 	256.
+
+    integers:
+    	BADC,   16, 
+		BFCC,   16,
+		MCUR,   16, 
+    	MBRM,   16, 
+    	MBCV,   16,
+    	SMW0,	16,
+    buffers:
+    	FLD0,	64,
+    	FLD1,	128.
+    	FLD2,	192,
+    	FLD3,	256,
+    	SMD0,   256,
