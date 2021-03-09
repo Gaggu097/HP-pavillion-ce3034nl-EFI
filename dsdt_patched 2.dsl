@@ -50771,48 +50771,18 @@ Method (WECB, 3, Serialized)
                     }
                 PBIF [0x0C] = "HP"
             }
-
+            
             Method (UPBS, 0, NotSerialized)
-            {
-                Local0 = B1B2(^^PCI0.LPCB.EC0.CUR0,^^PCI0.LPCB.EC0.CUR1) /* \_SB_.PCI0.LPCB.EC0_.MCUR */
-                If ((Local0 & 0x8000))
-                {
-                    If ((Local0 == 0xFFFF))
                     {
-                        PBST [One] = 0xFFFFFFFF
-                    }
-                    Else
-                    {
-                        Local1 = ~Local0
-                        Local1++
-                        Local3 = (Local1 & 0xFFFF)
-                        PBST [One] = Local3
-                    }
-                }
-                Else
-                {
-                    PBST [One] = Local0
-                }
-
-                Local5 = B1B2(^^PCI0.LPCB.EC0.BRM0,^^PCI0.LPCB.EC0.BRM1) /* \_SB_.PCI0.LPCB.EC0_.MBRM */
-                If (!(Local5 & 0x8000))
-                {
-                    Local5 >>= 0x05
-                    Local5 <<= 0x05
-                    If ((Local5 != DerefOf (PBST [0x02])))
-                    {
-                        PBST [0x02] = Local5
-                    }
-                }
-
-                If ((!^^PCI0.LPCB.EC0.SW2S && (^^PCI0.LPCB.EC0.BACR == One)))
-                {
-                    PBST [0x02] = FABL /* \_SB_.BAT0.FABL */
-                }
-
-                PBST [0x03] = B1B2(^^PCI0.LPCB.EC0.BCV0,^^PCI0.LPCB.EC0.BCV1) /* \_SB_.PCI0.LPCB.EC0_.MBCV */
-                PBST [Zero] = ^^PCI0.LPCB.EC0.MBST /* \_SB_.PCI0.LPCB.EC0_.MBST */
+                    Store (^^PCI0.LPCB.EC0.MBST, Index (PBST, Zero))
+                    ^^PCI0.LPCB.EC0.SMRD (0x09, 0x16, 0x0A, RefOf (Local0))
+                    Store (Local0, Index (PBST, One))
+                    ^^PCI0.LPCB.EC0.SMRD (0x09, 0x16, 0x0F, RefOf (Local1))
+                    Store (Local1, Index (PBST, 0x02))
+                    ^^PCI0.LPCB.EC0.SMRD (0x09, 0x16, 0x09, RefOf (Local2))
+                    Store (Local2, Index (PBST, 0x03))
             }
+
 
             Method (IVBI, 0, NotSerialized)
             {
