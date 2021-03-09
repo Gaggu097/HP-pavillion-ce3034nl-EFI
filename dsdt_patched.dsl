@@ -18656,12 +18656,13 @@ F31C,8,F31D,8,F31E,8,F31F,8
                         }
                         ElseIf ((Local3 < 0x11))
                         {
-                            Store(^RFL1(), Local2)
+                            Store(RFL1(), Local2)
                             //Local2 = FLD1 /* \_SB_.PCI0.LPCB.EC0_.FLD1 */
                         }
                         ElseIf ((Local3 < 0x19))
                         {
-                            Local2 = FLD2 /* \_SB_.PCI0.LPCB.EC0_.FLD2 */
+                            Store(RFL2(), Local2)
+                            //Local2 = FLD2 /* \_SB_.PCI0.LPCB.EC0_.FLD2 */
                         }
                         Else
                         {
@@ -18741,7 +18742,9 @@ F31C,8,F31D,8,F31E,8,F31F,8
 
                     If ((Arg0 == 0x0A))
                     {
-                        SMD0 = Arg3
+                        WSMD(Arg3)
+                        //Store(Arg3, RSMD())
+                        //SMD0 = Arg3
                     }
 
                     SMST &= 0x40
@@ -19092,6 +19095,137 @@ F31C,8,F31D,8,F31E,8,F31F,8
                 Store (DerefOf(Index(TEMP, 0x1E)), SD1E)
                 Store (DerefOf(Index(TEMP, 0x1F)), SD1F)
             }
+            
+                Method (RFL0, 0, Serialized)
+                {
+                    Name (TEMP, Buffer(0x10) { })
+                    Store (^^^^PCI0.LPCB.EC0.F000, Index(TEMP, 0x00))
+                    Store (^^^^PCI0.LPCB.EC0.F001, Index(TEMP, 0x01))
+                    Store (^^^^PCI0.LPCB.EC0.F002, Index(TEMP, 0x02))
+                    Store (^^^^PCI0.LPCB.EC0.F003, Index(TEMP, 0x03))
+                    Store (^^^^PCI0.LPCB.EC0.F004, Index(TEMP, 0x04))
+                    Store (^^^^PCI0.LPCB.EC0.F005, Index(TEMP, 0x05))
+                    Store (^^^^PCI0.LPCB.EC0.F006, Index(TEMP, 0x06))
+                    Store (^^^^PCI0.LPCB.EC0.F007, Index(TEMP, 0x07))
+                    Return (TEMP)
+                }
+                
+                Method (WFL0, 1, Serialized)
+                {
+                    Name (TEMP, Buffer(0x10) { })
+                    Store (Arg0, TEMP)
+                    Store (DerefOf(Index(TEMP, 0x00)), ^^^^PCI0.LPCB.EC0.F000)
+                    Store (DerefOf(Index(TEMP, 0x01)), ^^^^PCI0.LPCB.EC0.F001)
+                    Store (DerefOf(Index(TEMP, 0x02)), ^^^^PCI0.LPCB.EC0.F002)
+                    Store (DerefOf(Index(TEMP, 0x03)), ^^^^PCI0.LPCB.EC0.F003)
+                    Store (DerefOf(Index(TEMP, 0x04)), ^^^^PCI0.LPCB.EC0.F004)
+                    Store (DerefOf(Index(TEMP, 0x05)), ^^^^PCI0.LPCB.EC0.F005)
+                    Store (DerefOf(Index(TEMP, 0x06)), ^^^^PCI0.LPCB.EC0.F006)
+                    Store (DerefOf(Index(TEMP, 0x07)), ^^^^PCI0.LPCB.EC0.F007)
+                }
+                
+                Method (RFL1, 0, Serialized)
+                {
+                    Name (TEMP, Buffer(0x10) { })
+                    Store (^^^^PCI0.LPCB.EC0.F100, Index(TEMP, 0x00))
+                    Store (^^^^PCI0.LPCB.EC0.F101, Index(TEMP, 0x01))
+                    Store (^^^^PCI0.LPCB.EC0.F102, Index(TEMP, 0x02))
+                    Store (^^^^PCI0.LPCB.EC0.F103, Index(TEMP, 0x03))
+                    Store (^^^^PCI0.LPCB.EC0.F104, Index(TEMP, 0x04))
+                    Store (^^^^PCI0.LPCB.EC0.F105, Index(TEMP, 0x05))
+                    Store (^^^^PCI0.LPCB.EC0.F106, Index(TEMP, 0x06))
+                    Store (^^^^PCI0.LPCB.EC0.F107, Index(TEMP, 0x07))
+                    Store (^^^^PCI0.LPCB.EC0.F108, Index(TEMP, 0x08))
+                    Store (^^^^PCI0.LPCB.EC0.F109, Index(TEMP, 0x09))
+                    Store (^^^^PCI0.LPCB.EC0.F10A, Index(TEMP, 0x0A))
+                    Store (^^^^PCI0.LPCB.EC0.F10B, Index(TEMP, 0x0B))
+                    Store (^^^^PCI0.LPCB.EC0.F10C, Index(TEMP, 0x0C))
+                    Store (^^^^PCI0.LPCB.EC0.F10D, Index(TEMP, 0x0D))
+                    Store (^^^^PCI0.LPCB.EC0.F10E, Index(TEMP, 0x0E))
+                    Store (^^^^PCI0.LPCB.EC0.F10F, Index(TEMP, 0x0F))
+                    Return (TEMP)
+                }
+                
+                Method (WFL1, 1, Serialized)
+                {
+                    Name (TEMP, Buffer(0x10) { })
+                    Store (Arg0, TEMP)
+                    Store (DerefOf(Index(TEMP, 0x00)), ^^^^PCI0.LPCB.EC0.F100)
+                    Store (DerefOf(Index(TEMP, 0x01)), ^^^^PCI0.LPCB.EC0.F101)
+                    Store (DerefOf(Index(TEMP, 0x02)), ^^^^PCI0.LPCB.EC0.F102)
+                    Store (DerefOf(Index(TEMP, 0x03)), ^^^^PCI0.LPCB.EC0.F103)
+                    Store (DerefOf(Index(TEMP, 0x04)), ^^^^PCI0.LPCB.EC0.F104)
+                    Store (DerefOf(Index(TEMP, 0x05)), ^^^^PCI0.LPCB.EC0.F105)
+                    Store (DerefOf(Index(TEMP, 0x06)), ^^^^PCI0.LPCB.EC0.F106)
+                    Store (DerefOf(Index(TEMP, 0x07)), ^^^^PCI0.LPCB.EC0.F107)
+                    Store (DerefOf(Index(TEMP, 0x08)), ^^^^PCI0.LPCB.EC0.F108)
+                    Store (DerefOf(Index(TEMP, 0x09)), ^^^^PCI0.LPCB.EC0.F109)
+                    Store (DerefOf(Index(TEMP, 0x0A)), ^^^^PCI0.LPCB.EC0.F10A)
+                    Store (DerefOf(Index(TEMP, 0x0B)), ^^^^PCI0.LPCB.EC0.F10B)
+                    Store (DerefOf(Index(TEMP, 0x0C)), ^^^^PCI0.LPCB.EC0.F10C)
+                    Store (DerefOf(Index(TEMP, 0x0D)), ^^^^PCI0.LPCB.EC0.F10D)
+                    Store (DerefOf(Index(TEMP, 0x0E)), ^^^^PCI0.LPCB.EC0.F10E)
+                    Store (DerefOf(Index(TEMP, 0x0F)), ^^^^PCI0.LPCB.EC0.F10F)
+                }
+                Method (RFL2, 0, Serialized)
+                {
+                    Name (TEMP, Buffer(0x18) { })
+                    Store (^^^^PCI0.LPCB.EC0.F200, Index(TEMP, 0x00))
+                    Store (^^^^PCI0.LPCB.EC0.F201, Index(TEMP, 0x01))
+                    Store (^^^^PCI0.LPCB.EC0.F202, Index(TEMP, 0x02))
+                    Store (^^^^PCI0.LPCB.EC0.F203, Index(TEMP, 0x03))
+                    Store (^^^^PCI0.LPCB.EC0.F204, Index(TEMP, 0x04))
+                    Store (^^^^PCI0.LPCB.EC0.F205, Index(TEMP, 0x05))
+                    Store (^^^^PCI0.LPCB.EC0.F206, Index(TEMP, 0x06))
+                    Store (^^^^PCI0.LPCB.EC0.F207, Index(TEMP, 0x07))
+                    Store (^^^^PCI0.LPCB.EC0.F208, Index(TEMP, 0x08))
+                    Store (^^^^PCI0.LPCB.EC0.F209, Index(TEMP, 0x09))
+                    Store (^^^^PCI0.LPCB.EC0.F20A, Index(TEMP, 0x0A))
+                    Store (^^^^PCI0.LPCB.EC0.F20B, Index(TEMP, 0x0B))
+                    Store (^^^^PCI0.LPCB.EC0.F20C, Index(TEMP, 0x0C))
+                    Store (^^^^PCI0.LPCB.EC0.F20D, Index(TEMP, 0x0D))
+                    Store (^^^^PCI0.LPCB.EC0.F20E, Index(TEMP, 0x0E))
+                    Store (^^^^PCI0.LPCB.EC0.F20F, Index(TEMP, 0x0F))
+                    Store (^^^^PCI0.LPCB.EC0.F210, Index(TEMP, 0x10))
+                    Store (^^^^PCI0.LPCB.EC0.F211, Index(TEMP, 0x11))
+                    Store (^^^^PCI0.LPCB.EC0.F212, Index(TEMP, 0x12))
+                    Store (^^^^PCI0.LPCB.EC0.F213, Index(TEMP, 0x13))
+                    Store (^^^^PCI0.LPCB.EC0.F214, Index(TEMP, 0x14))
+                    Store (^^^^PCI0.LPCB.EC0.F215, Index(TEMP, 0x15))
+                    Store (^^^^PCI0.LPCB.EC0.F216, Index(TEMP, 0x16))
+                    Store (^^^^PCI0.LPCB.EC0.F217, Index(TEMP, 0x17))
+                    Return (TEMP)
+                }
+                
+                Method (WFL2, 1, Serialized)
+                {
+                    Name (TEMP, Buffer(0x18) { })
+                    Store (Arg0, TEMP)
+                    Store (DerefOf(Index(TEMP, 0x00)), ^^^^PCI0.LPCB.EC0.F200)
+                    Store (DerefOf(Index(TEMP, 0x01)), ^^^^PCI0.LPCB.EC0.F201)
+                    Store (DerefOf(Index(TEMP, 0x02)), ^^^^PCI0.LPCB.EC0.F202)
+                    Store (DerefOf(Index(TEMP, 0x03)), ^^^^PCI0.LPCB.EC0.F203)
+                    Store (DerefOf(Index(TEMP, 0x04)), ^^^^PCI0.LPCB.EC0.F204)
+                    Store (DerefOf(Index(TEMP, 0x05)), ^^^^PCI0.LPCB.EC0.F205)
+                    Store (DerefOf(Index(TEMP, 0x06)), ^^^^PCI0.LPCB.EC0.F206)
+                    Store (DerefOf(Index(TEMP, 0x07)), ^^^^PCI0.LPCB.EC0.F207)
+                    Store (DerefOf(Index(TEMP, 0x08)), ^^^^PCI0.LPCB.EC0.F208)
+                    Store (DerefOf(Index(TEMP, 0x09)), ^^^^PCI0.LPCB.EC0.F209)
+                    Store (DerefOf(Index(TEMP, 0x0A)), ^^^^PCI0.LPCB.EC0.F20A)
+                    Store (DerefOf(Index(TEMP, 0x0B)), ^^^^PCI0.LPCB.EC0.F20B)
+                    Store (DerefOf(Index(TEMP, 0x0C)), ^^^^PCI0.LPCB.EC0.F20C)
+                    Store (DerefOf(Index(TEMP, 0x0D)), ^^^^PCI0.LPCB.EC0.F20D)
+                    Store (DerefOf(Index(TEMP, 0x0E)), ^^^^PCI0.LPCB.EC0.F20E)
+                    Store (DerefOf(Index(TEMP, 0x0F)), ^^^^PCI0.LPCB.EC0.F20F)
+                    Store (DerefOf(Index(TEMP, 0x10)), ^^^^PCI0.LPCB.EC0.F210)
+                    Store (DerefOf(Index(TEMP, 0x11)), ^^^^PCI0.LPCB.EC0.F211)
+                    Store (DerefOf(Index(TEMP, 0x12)), ^^^^PCI0.LPCB.EC0.F212)
+                    Store (DerefOf(Index(TEMP, 0x13)), ^^^^PCI0.LPCB.EC0.F213)
+                    Store (DerefOf(Index(TEMP, 0x14)), ^^^^PCI0.LPCB.EC0.F214)
+                    Store (DerefOf(Index(TEMP, 0x15)), ^^^^PCI0.LPCB.EC0.F215)
+                    Store (DerefOf(Index(TEMP, 0x16)), ^^^^PCI0.LPCB.EC0.F216)
+                    Store (DerefOf(Index(TEMP, 0x17)), ^^^^PCI0.LPCB.EC0.F217)
+                }
             Method (RFL3, 0, Serialized)
             {
                 Name (TEMP, Buffer(0x20) { })
@@ -19206,65 +19340,7 @@ F31C,8,F31D,8,F31E,8,F31F,8
                         _SB
                     })
                 }
-                Method (RFL2, 0, Serialized)
-                {
-                    Name (TEMP, Buffer(0x18) { })
-                    Store (^^PCI0.LPCB.EC0.F200, Index(TEMP, 0x00))
-                    Store (^^PCI0.LPCB.EC0.F201, Index(TEMP, 0x01))
-                    Store (^^PCI0.LPCB.EC0.F202, Index(TEMP, 0x02))
-                    Store (^^PCI0.LPCB.EC0.F203, Index(TEMP, 0x03))
-                    Store (^^PCI0.LPCB.EC0.F204, Index(TEMP, 0x04))
-                    Store (^^PCI0.LPCB.EC0.F205, Index(TEMP, 0x05))
-                    Store (^^PCI0.LPCB.EC0.F206, Index(TEMP, 0x06))
-                    Store (^^PCI0.LPCB.EC0.F207, Index(TEMP, 0x07))
-                    Store (^^PCI0.LPCB.EC0.F208, Index(TEMP, 0x08))
-                    Store (^^PCI0.LPCB.EC0.F209, Index(TEMP, 0x09))
-                    Store (^^PCI0.LPCB.EC0.F20A, Index(TEMP, 0x0A))
-                    Store (^^PCI0.LPCB.EC0.F20B, Index(TEMP, 0x0B))
-                    Store (^^PCI0.LPCB.EC0.F20C, Index(TEMP, 0x0C))
-                    Store (^^PCI0.LPCB.EC0.F20D, Index(TEMP, 0x0D))
-                    Store (^^PCI0.LPCB.EC0.F20E, Index(TEMP, 0x0E))
-                    Store (^^PCI0.LPCB.EC0.F20F, Index(TEMP, 0x0F))
-                    Store (^^PCI0.LPCB.EC0.F210, Index(TEMP, 0x10))
-                    Store (^^PCI0.LPCB.EC0.F211, Index(TEMP, 0x11))
-                    Store (^^PCI0.LPCB.EC0.F212, Index(TEMP, 0x12))
-                    Store (^^PCI0.LPCB.EC0.F213, Index(TEMP, 0x13))
-                    Store (^^PCI0.LPCB.EC0.F214, Index(TEMP, 0x14))
-                    Store (^^PCI0.LPCB.EC0.F215, Index(TEMP, 0x15))
-                    Store (^^PCI0.LPCB.EC0.F216, Index(TEMP, 0x16))
-                    Store (^^PCI0.LPCB.EC0.F217, Index(TEMP, 0x17))
-                    Return (TEMP)
-                }
                 
-                Method (WFL2, 1, Serialized)
-                {
-                    Name (TEMP, Buffer(0x18) { })
-                    Store (Arg0, TEMP)
-                    Store (DerefOf(Index(TEMP, 0x00)), ^^PCI0.LPCB.EC0.F200)
-                    Store (DerefOf(Index(TEMP, 0x01)), ^^PCI0.LPCB.EC0.F201)
-                    Store (DerefOf(Index(TEMP, 0x02)), ^^PCI0.LPCB.EC0.F202)
-                    Store (DerefOf(Index(TEMP, 0x03)), ^^PCI0.LPCB.EC0.F203)
-                    Store (DerefOf(Index(TEMP, 0x04)), ^^PCI0.LPCB.EC0.F204)
-                    Store (DerefOf(Index(TEMP, 0x05)), ^^PCI0.LPCB.EC0.F205)
-                    Store (DerefOf(Index(TEMP, 0x06)), ^^PCI0.LPCB.EC0.F206)
-                    Store (DerefOf(Index(TEMP, 0x07)), ^^PCI0.LPCB.EC0.F207)
-                    Store (DerefOf(Index(TEMP, 0x08)), ^^PCI0.LPCB.EC0.F208)
-                    Store (DerefOf(Index(TEMP, 0x09)), ^^PCI0.LPCB.EC0.F209)
-                    Store (DerefOf(Index(TEMP, 0x0A)), ^^PCI0.LPCB.EC0.F20A)
-                    Store (DerefOf(Index(TEMP, 0x0B)), ^^PCI0.LPCB.EC0.F20B)
-                    Store (DerefOf(Index(TEMP, 0x0C)), ^^PCI0.LPCB.EC0.F20C)
-                    Store (DerefOf(Index(TEMP, 0x0D)), ^^PCI0.LPCB.EC0.F20D)
-                    Store (DerefOf(Index(TEMP, 0x0E)), ^^PCI0.LPCB.EC0.F20E)
-                    Store (DerefOf(Index(TEMP, 0x0F)), ^^PCI0.LPCB.EC0.F20F)
-                    Store (DerefOf(Index(TEMP, 0x10)), ^^PCI0.LPCB.EC0.F210)
-                    Store (DerefOf(Index(TEMP, 0x11)), ^^PCI0.LPCB.EC0.F211)
-                    Store (DerefOf(Index(TEMP, 0x12)), ^^PCI0.LPCB.EC0.F212)
-                    Store (DerefOf(Index(TEMP, 0x13)), ^^PCI0.LPCB.EC0.F213)
-                    Store (DerefOf(Index(TEMP, 0x14)), ^^PCI0.LPCB.EC0.F214)
-                    Store (DerefOf(Index(TEMP, 0x15)), ^^PCI0.LPCB.EC0.F215)
-                    Store (DerefOf(Index(TEMP, 0x16)), ^^PCI0.LPCB.EC0.F216)
-                    Store (DerefOf(Index(TEMP, 0x17)), ^^PCI0.LPCB.EC0.F217)
-                }
                 
             }
 
@@ -19292,49 +19368,6 @@ F31C,8,F31D,8,F31E,8,F31F,8
                     ^^PCI0.LPCB.EC0.ULID (One)
                     Return (Local0)
                 }
-                Method (RFL1, 0, Serialized)
-                {
-                    Name (TEMP, Buffer(0x10) { })
-                    Store (^^PCI0.LPCB.EC0.F100, Index(TEMP, 0x00))
-                    Store (^^PCI0.LPCB.EC0.F101, Index(TEMP, 0x01))
-                    Store (^^PCI0.LPCB.EC0.F102, Index(TEMP, 0x02))
-                    Store (^^PCI0.LPCB.EC0.F103, Index(TEMP, 0x03))
-                    Store (^^PCI0.LPCB.EC0.F104, Index(TEMP, 0x04))
-                    Store (^^PCI0.LPCB.EC0.F105, Index(TEMP, 0x05))
-                    Store (^^PCI0.LPCB.EC0.F106, Index(TEMP, 0x06))
-                    Store (^^PCI0.LPCB.EC0.F107, Index(TEMP, 0x07))
-                    Store (^^PCI0.LPCB.EC0.F108, Index(TEMP, 0x08))
-                    Store (^^PCI0.LPCB.EC0.F109, Index(TEMP, 0x09))
-                    Store (^^PCI0.LPCB.EC0.F10A, Index(TEMP, 0x0A))
-                    Store (^^PCI0.LPCB.EC0.F10B, Index(TEMP, 0x0B))
-                    Store (^^PCI0.LPCB.EC0.F10C, Index(TEMP, 0x0C))
-                    Store (^^PCI0.LPCB.EC0.F10D, Index(TEMP, 0x0D))
-                    Store (^^PCI0.LPCB.EC0.F10E, Index(TEMP, 0x0E))
-                    Store (^^PCI0.LPCB.EC0.F10F, Index(TEMP, 0x0F))
-                    Return (TEMP)
-                }
-                
-                Method (WFL1, 1, Serialized)
-                {
-                    Name (TEMP, Buffer(0x10) { })
-                    Store (Arg0, TEMP)
-                    Store (DerefOf(Index(TEMP, 0x00)), ^^PCI0.LPCB.EC0.F100)
-                    Store (DerefOf(Index(TEMP, 0x01)), ^^PCI0.LPCB.EC0.F101)
-                    Store (DerefOf(Index(TEMP, 0x02)), ^^PCI0.LPCB.EC0.F102)
-                    Store (DerefOf(Index(TEMP, 0x03)), ^^PCI0.LPCB.EC0.F103)
-                    Store (DerefOf(Index(TEMP, 0x04)), ^^PCI0.LPCB.EC0.F104)
-                    Store (DerefOf(Index(TEMP, 0x05)), ^^PCI0.LPCB.EC0.F105)
-                    Store (DerefOf(Index(TEMP, 0x06)), ^^PCI0.LPCB.EC0.F106)
-                    Store (DerefOf(Index(TEMP, 0x07)), ^^PCI0.LPCB.EC0.F107)
-                    Store (DerefOf(Index(TEMP, 0x08)), ^^PCI0.LPCB.EC0.F108)
-                    Store (DerefOf(Index(TEMP, 0x09)), ^^PCI0.LPCB.EC0.F109)
-                    Store (DerefOf(Index(TEMP, 0x0A)), ^^PCI0.LPCB.EC0.F10A)
-                    Store (DerefOf(Index(TEMP, 0x0B)), ^^PCI0.LPCB.EC0.F10B)
-                    Store (DerefOf(Index(TEMP, 0x0C)), ^^PCI0.LPCB.EC0.F10C)
-                    Store (DerefOf(Index(TEMP, 0x0D)), ^^PCI0.LPCB.EC0.F10D)
-                    Store (DerefOf(Index(TEMP, 0x0E)), ^^PCI0.LPCB.EC0.F10E)
-                    Store (DerefOf(Index(TEMP, 0x0F)), ^^PCI0.LPCB.EC0.F10F)
-                }
                 
             }
 
@@ -19344,33 +19377,6 @@ F31C,8,F31D,8,F31E,8,F31F,8
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
                     Return (0x0F)
-                }
-                Method (RFL0, 0, Serialized)
-                {
-                    Name (TEMP, Buffer(0x10) { })
-                    Store (^^PCI0.LPCB.EC0.F000, Index(TEMP, 0x00))
-                    Store (^^PCI0.LPCB.EC0.F001, Index(TEMP, 0x01))
-                    Store (^^PCI0.LPCB.EC0.F002, Index(TEMP, 0x02))
-                    Store (^^PCI0.LPCB.EC0.F003, Index(TEMP, 0x03))
-                    Store (^^PCI0.LPCB.EC0.F004, Index(TEMP, 0x04))
-                    Store (^^PCI0.LPCB.EC0.F005, Index(TEMP, 0x05))
-                    Store (^^PCI0.LPCB.EC0.F006, Index(TEMP, 0x06))
-                    Store (^^PCI0.LPCB.EC0.F007, Index(TEMP, 0x07))
-                    Return (TEMP)
-                }
-                
-                Method (WFL0, 1, Serialized)
-                {
-                    Name (TEMP, Buffer(0x10) { })
-                    Store (Arg0, TEMP)
-                    Store (DerefOf(Index(TEMP, 0x00)), ^^PCI0.LPCB.EC0.F000)
-                    Store (DerefOf(Index(TEMP, 0x01)), ^^PCI0.LPCB.EC0.F001)
-                    Store (DerefOf(Index(TEMP, 0x02)), ^^PCI0.LPCB.EC0.F002)
-                    Store (DerefOf(Index(TEMP, 0x03)), ^^PCI0.LPCB.EC0.F003)
-                    Store (DerefOf(Index(TEMP, 0x04)), ^^PCI0.LPCB.EC0.F004)
-                    Store (DerefOf(Index(TEMP, 0x05)), ^^PCI0.LPCB.EC0.F005)
-                    Store (DerefOf(Index(TEMP, 0x06)), ^^PCI0.LPCB.EC0.F006)
-                    Store (DerefOf(Index(TEMP, 0x07)), ^^PCI0.LPCB.EC0.F007)
                 }
                 
             }
