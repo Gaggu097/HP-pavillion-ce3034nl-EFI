@@ -18651,21 +18651,25 @@ F31C,8,F31D,8,F31E,8,F31F,8
 
                         If ((Local3 < 0x09))
                         {
-                            Store(RFL0(), Local2)
+                            Local2 = RFL0()
+                            //Store(RFL0(), Local2)
                             //Local2 = FLD0 /* \_SB_.PCI0.LPCB.EC0_.FLD0 */
                         }
                         ElseIf ((Local3 < 0x11))
                         {
-                            Store(RFL1(), Local2)
+                            Local2 = RFL1()
+                            //Store(RFL1(), Local2)
                             //Local2 = FLD1 /* \_SB_.PCI0.LPCB.EC0_.FLD1 */
                         }
                         ElseIf ((Local3 < 0x19))
                         {
-                            Store(RFL2(), Local2)
+                            Local2 = RFL2()
+                            //Store(RFL2(), Local2)
                             //Local2 = FLD2 /* \_SB_.PCI0.LPCB.EC0_.FLD2 */
                         }
                         Else
                         {
+                            Local2 = RFL3()
                             Store(RFL3(), Local2)
                             //Local2 = FLD3 /* \_SB_.PCI0.LPCB.EC0_.FLD3 */
                         }
@@ -50432,7 +50436,7 @@ Method (WECB, 3, Serialized)
                     {
                         If ((^^^BAT0._STA () == 0x1F))
                         {
-                            If ((B1B2(^^^PCI0.LPCB.EC0.BRM0, ^^^PCI0.LPCB.EC0.BRM1) <= 0x96))
+                            If (((B1B2(^^^PCI0.LPCB.EC0.BRM0, ^^^PCI0.LPCB.EC0.BRM1)) <= 0x96))
                             {
                                 Local0 = One
                             }
