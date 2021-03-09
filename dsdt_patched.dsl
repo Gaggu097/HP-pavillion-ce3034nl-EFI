@@ -18737,7 +18737,8 @@ F31C,8,F31D,8,F31E,8,F31F,8
 
                     If ((Arg0 == 0x08))
                     {
-                        B1B2(SMWX,SMWY) = Arg3
+                        WECB(0x04,16, Arg3)             
+                        //B1B2(SMWX,SMWY) = Arg3
                     }
 
                     If ((Arg0 == 0x0A))
@@ -19226,6 +19227,30 @@ F31C,8,F31D,8,F31E,8,F31F,8
                     Store (DerefOf(Index(TEMP, 0x16)), ^^^^PCI0.LPCB.EC0.F216)
                     Store (DerefOf(Index(TEMP, 0x17)), ^^^^PCI0.LPCB.EC0.F217)
                 }
+                
+                Method (WE1B, 2, NotSerialized)
+{
+    OperationRegion(ERAM, EmbeddedControl, Arg0, 1)
+    Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }
+    Store(Arg1, BYTE)
+}
+Method (WECB, 3, Serialized)
+// Arg0 - offset in bytes from zero-based EC
+// Arg1 - size of buffer in bits
+// Arg2 - value to write
+{
+    ShiftRight(Add(Arg1,7), 3, Arg1)
+    Name(TEMP, Buffer(Arg1) { })
+    Store(Arg2, TEMP)
+    Add(Arg0, Arg1, Arg1)
+    Store(0, Local0)
+    While (LLess(Arg0, Arg1))
+    {
+        WE1B(Arg0, DerefOf(Index(TEMP, Local0)))
+        Increment(Arg0)
+        Increment(Local0)
+    }
+}
             Method (RFL3, 0, Serialized)
             {
                 Name (TEMP, Buffer(0x20) { })
@@ -50654,6 +50679,10 @@ F31C,8,F31D,8,F31E,8,F31F,8
 
             Method (UPBI, 0, NotSerialized)
             {
+                //Store (^^^^PCI0.EC0.FCC0, Index (DerefOf (Index (Local5, 0x02)), Zero))
+                //Store (FCC1, Index (DerefOf (Index (Local5, 0x02)), One))
+                
+                //Store(B1B2(^^PCI0.LPCB.EC0.FCC0,^^PCI0.LPCB.EC0.FCC1),Local5)
                 Local5 = B1B2(^^PCI0.LPCB.EC0.FCC0,^^PCI0.LPCB.EC0.FCC1) /* \_SB_.PCI0.LPCB.EC0_.BFCC */
                 If ((Local5 && !(Local5 & 0x8000)))
                 {
